@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyForge</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/planner.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ========================= -->
+        <!-- SIDEBAR -->
+        <!-- ========================= -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    📚
+                </div>
+
+                <div class="logo-text">
+                    <h2>StudyForge</h2>
+                    <span>Suite de estudio</span>
+                </div>
+
+            </div>
+
+            <nav class="menu">
+
+                <button class="menu-item active" data-module="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    Dashboard
+                </button>
+
+                <button class="menu-item" data-module="planner">
+                    <i data-lucide="calendar-days"></i>
+                    Planificador
+                </button>
+
+                <button class="menu-item" data-module="flashcards">
+                    <i data-lucide="layers-3"></i>
+                    Flashcards
+                </button>
+
+                <button class="menu-item" data-module="pomodoro">
+                    <i data-lucide="timer-reset"></i>
+                    Pomodoro
+                </button>
+
+                <button class="menu-item" data-module="notes">
+                    <i data-lucide="notebook-pen"></i>
+                    Apuntes
+                </button>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <button class="menu-item" data-module="settings">
+                    <i data-lucide="settings"></i>
+                    Configuración
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ========================= -->
+        <!-- CONTENIDO -->
+        <!-- ========================= -->
+
+        <div class="content">
+
+            <!-- HEADER -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1 id="page-title">
+                        Dashboard
+                    </h1>
+
+                    <p id="page-description">
+                        Bienvenido a StudyForge
+                    </p>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button id="primary-action" class="btn btn-primary">
+
+                        <i data-lucide="plus"></i>
+
+                        Nueva materia
+
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- MAIN -->
+
+            <main id="module-container">
+
+                <!-- Dashboard temporal -->
+
+                <section class="welcome">
+
+                    <div class="welcome-card">
+
+                        <h2>
+                            Bienvenido a StudyForge
+                        </h2>
+
+                        <p>
+
+                            Organiza tus materias, estudia con Pomodoro,
+                            crea flashcards, guarda apuntes y visualiza
+                            tu progreso desde un solo lugar.
+
+                        </p>
+
+                        <button class="btn btn-primary">
+
+                            Comenzar
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- MODAL -->
+    <!-- ========================= -->
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    Modal
+
+                </h2>
+
+                <button class="close-modal">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- TOAST -->
+    <!-- ========================= -->
+
+    <div id="toast-container">
+
+    </div>
+
+    <!-- JS -->
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/utils.js"></script>
+
+    <script src="assets/js/planificador/planner-storage.js"></script>
+    <script src="assets/js/planificador/planner-cronograma.js"></script>
+    <script src="assets/js/planificador/planner-view.js"></script>
+    <script src="assets/js/planificador/planner.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>

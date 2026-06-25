@@ -1,0 +1,578 @@
+/* ==========================================================
+   STUDYFORGE
+   MAIN.CSS
+   Estilos globales de la aplicación
+========================================================== */
+
+/* ===========================
+   VARIABLES
+=========================== */
+
+:root {
+
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+
+    --secondary: #3b82f6;
+
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --danger: #dc2626;
+
+    --background: #f5f7fb;
+    --surface: #ffffff;
+
+    --text: #1f2937;
+    --text-light: #6b7280;
+
+    --border: #e5e7eb;
+
+    --shadow-sm: 0 2px 8px rgba(0,0,0,.05);
+    --shadow-md: 0 8px 20px rgba(0,0,0,.08);
+
+    --radius: 16px;
+
+    --sidebar-width: 270px;
+
+    --transition: .25s ease;
+
+}
+
+
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+}
+
+
+/* ===========================
+   LINKS
+=========================== */
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+button{
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    border:none;
+
+    background:none;
+
+}
+
+
+/* ===========================
+   LISTAS
+=========================== */
+
+ul{
+
+    list-style:none;
+
+}
+
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.app{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+
+    width:var(--sidebar-width);
+
+    background:#0f172a;
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    padding:28px;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    bottom:0;
+
+}
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:45px;
+
+}
+
+
+.logo-icon{
+
+    font-size:34px;
+
+}
+
+
+.logo-text h2{
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:1.3rem;
+
+}
+
+
+.logo-text span{
+
+    color:#94a3b8;
+
+    font-size:.85rem;
+
+}
+
+
+/* ===========================
+   MENU
+=========================== */
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+.menu-item{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    color:#cbd5e1;
+
+    transition:var(--transition);
+
+    font-size:.95rem;
+
+}
+
+
+.menu-item:hover{
+
+    background:#1e293b;
+
+    color:white;
+
+}
+
+
+.menu-item.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+
+.sidebar-footer{
+
+    margin-top:auto;
+
+}
+
+
+/* ===========================
+   CONTENIDO
+=========================== */
+
+.content{
+
+    margin-left:var(--sidebar-width);
+
+    width:calc(100% - var(--sidebar-width));
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+.topbar{
+
+    background:white;
+
+    padding:28px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+.topbar h1{
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:2rem;
+
+    margin-bottom:5px;
+
+}
+
+
+.topbar p{
+
+    color:var(--text-light);
+
+}
+
+
+.topbar-actions{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+
+/* ===========================
+   MAIN
+=========================== */
+
+main{
+
+    flex:1;
+
+    padding:40px;
+
+}
+
+
+/* ===========================
+   WELCOME
+=========================== */
+
+.welcome{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:70vh;
+
+}
+
+
+.welcome-card{
+
+    width:700px;
+
+    background:white;
+
+    border-radius:var(--radius);
+
+    padding:60px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow-md);
+
+}
+
+
+.welcome-card h2{
+
+    font-family:'Poppins';
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+}
+
+
+.welcome-card p{
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+}
+
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+}
+
+
+.modal{
+
+    width:600px;
+
+    background:white;
+
+    border-radius:var(--radius);
+
+    overflow:hidden;
+
+    animation:fadeUp .25s ease;
+
+}
+
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 30px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+.modal-body{
+
+    padding:30px;
+
+}
+
+
+.close-modal{
+
+    font-size:22px;
+
+}
+
+
+/* ===========================
+   TOAST
+=========================== */
+
+#toast-container{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+    z-index:9999;
+
+}
+
+
+/* ===========================
+   HELPERS
+=========================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+
+/* ===========================
+   ANIMACIONES
+=========================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        width:80px;
+
+        padding:20px 12px;
+
+    }
+
+    .logo-text{
+
+        display:none;
+
+    }
+
+    .menu-item{
+
+        justify-content:center;
+
+    }
+
+    .menu-item span{
+
+        display:none;
+
+    }
+
+    .content{
+
+        margin-left:80px;
+
+        width:calc(100% - 80px);
+
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+    main{
+
+        padding:20px;
+
+    }
+
+    .welcome-card{
+
+        width:100%;
+
+        padding:35px;
+
+    }
+
+}
