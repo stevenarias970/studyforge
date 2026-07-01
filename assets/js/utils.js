@@ -16,7 +16,17 @@ const Utils = {
     */
     uuid() {
 
-        return crypto.randomUUID();
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+
+        const r = Math.random() * 16 | 0;
+
+        const v = c === "x"
+             ? r
+            : (r & 0x3 | 0x8);
+
+            return v.toString(16);
+
+        });
 
     },
 
@@ -216,6 +226,92 @@ const Utils = {
     clone(object) {
 
         return structuredClone(object);
+
+    },
+
+    /*
+    =========================================
+    Modal de confirmación
+    =========================================
+    */
+
+    confirmModal(message, onConfirm) {
+
+        if (document.getElementById("confirm-modal")) return;
+
+        document.body.insertAdjacentHTML(
+
+            "beforeend",
+
+            `
+
+    <div id="confirm-modal" class="modal-wrapper">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h2>Confirmar acción</h2>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p>${message}</p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    id="confirm-cancel"
+                    class="btn btn-outline">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                    id="confirm-ok"
+                    class="btn btn-danger">
+
+                    Eliminar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `
+
+        );
+
+        document
+            .getElementById("confirm-cancel")
+            .onclick = () => {
+
+                document
+                    .getElementById("confirm-modal")
+                    .remove();
+
+            };
+
+        document
+            .getElementById("confirm-ok")
+            .onclick = () => {
+
+                onConfirm();
+
+                document
+                    .getElementById("confirm-modal")
+                    .remove();
+
+            };
 
     }
 

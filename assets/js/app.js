@@ -99,6 +99,12 @@ const App = {
         this.updateHeader();
 
         this.renderModule();
+        
+        if (module === "planner") {
+
+            Planner.init();
+
+        }
 
     },
 
@@ -193,84 +199,41 @@ const App = {
 
     renderDashboard() {
 
-        this.container.innerHTML = `
+            this.container.innerHTML = `
 
-            <section class="welcome">
+                <section class="welcome">
 
-                <div class="welcome-card">
+                    <div class="welcome-card">
 
-                    <h2>
-                        Bienvenido a StudyForge
-                    </h2>
-
-                    <p>
-
-                        Organiza todas tus materias, utiliza la técnica
-                        Pomodoro, crea Flashcards y lleva el control
-                        completo de tu progreso académico.
-
-                    </p>
-
-                    <button class="btn btn-primary">
-
-                        Comenzar
-
-                    </button>
-
-                </div>
-
-            </section>
-
-        `;
-
-    },
-
-    renderPlanner() {
-
-        this.container.innerHTML = `
-
-            <section class="planner">
-
-                <div class="planner-header">
-
-                    <div>
-
-                        <h2>Planificador de Estudio</h2>
+                        <h2>
+                            Bienvenido a StudyForge
+                        </h2>
 
                         <p>
 
-                            Crea tus materias y organiza todos tus temas.
+                            Organiza todas tus materias, utiliza la técnica
+                            Pomodoro, crea Flashcards y lleva el control
+                            completo de tu progreso académico.
 
                         </p>
 
+                        <button class="btn btn-primary">
+
+                            Comenzar
+
+                        </button>
+
                     </div>
 
-                </div>
+                </section>
 
-                <div class="empty-state">
+            `;
 
-                    <i data-lucide="book-open"></i>
+        },
 
-                    <h3>
+        renderPlanner() {
 
-                        Aún no tienes materias.
-
-                    </h3>
-
-                    <p>
-
-                        Presiona "Nueva materia"
-                        para comenzar.
-
-                    </p>
-
-                </div>
-
-            </section>
-
-        `;
-
-        lucide.createIcons();
+        Planner.refresh();
 
     },
 
