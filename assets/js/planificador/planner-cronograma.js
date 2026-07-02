@@ -2,8 +2,6 @@
 =========================================
 StudyForge
 planner-cronograma.js
-
-Cronograma automático
 =========================================
 */
 
@@ -11,17 +9,101 @@ const PlannerSchedule = {
 
     /*
     =========================================
-    Generar cronograma
+    Generar cronograma automático
+    =========================================
+    */
+
+    generate(subject) {
+
+        const schedule = [];
+
+        const today = new Date();
+
+        const deadline = new Date(subject.fechaLimite);
+
+        let currentDate = new Date(today);
+
+        subject.temas
+        .filter(topic => topic.estado !== "Completado")
+        .forEach(topic => {
+
+            let remainingMinutes = topic.tiempoEstimado;
+
+            while (remainingMinutes > 0) {
+
+                const studyMinutes = Math.min(
+
+                    remainingMinutes,
+
+                    subject.minutosPorDia
+
+                );
+
+                schedule.push({
+
+                    fecha: currentDate.toISOString().split("T")[0],
+
+                    tema: topic.nombre,
+
+                    minutos: studyMinutes,
+
+                    estado: topic.estado
+
+                });
+
+                remainingMinutes -= studyMinutes;
+
+                currentDate.setDate(
+
+                    currentDate.getDate() + 1
+
+                );
+
+                if (currentDate > deadline) {
+
+                    return [
+
+                        {
+
+                            error: true,
+
+                            mensaje: "No hay suficientes días para completar este plan."
+
+                        }
+
+                    ];
+
+                }
+
+            }
+
+        });
+
+        return schedule;
+
+    },
+
+    /*
+    =========================================
+    Mostrar cronograma
     =========================================
     */
 
     render(subjectId) {
 
-        const container = document.getElementById("schedule-container");
+        const container = document.getElementById(
+
+            "schedule-container"
+
+        );
 
         if (!container) return;
 
-        const subject = PlannerStorage.getSubjectById(subjectId);
+        const subject = PlannerStorage.getSubjectById(
+
+            subjectId
+
+        );
 
         if (!subject) return;
 
@@ -31,9 +113,11 @@ const PlannerSchedule = {
 
                 <div class="empty-state">
 
-                    <h3>No hay cronograma disponible.</h3>
+                    <h3>
 
-                    <p>Agrega temas para comenzar.</p>
+                        No hay cronograma.
+
+                    </h3>
 
                 </div>
 
@@ -43,25 +127,23 @@ const PlannerSchedule = {
 
         }
 
-        let html = "";
+        const schedule = this.generate(subject);
 
-        subject.temas.forEach(topic => {
+                if (schedule[0]?.error) {
 
-            html += `
+                 container.innerHTML = `
 
-                <div class="schedule-card">
+                <div class="empty-state">
 
-                    <h4>${topic.nombre}</h4>
+                    <h3>
 
-                    <p>
+                        ⚠️ Tiempo insuficiente
 
-                        ⏱ ${topic.tiempoEstimado} minutos
-
-                    </p>
+                    </h3>
 
                     <p>
 
-                        Estado: ${topic.estado}
+                        ${schedule[0].mensaje}
 
                     </p>
 
@@ -69,9 +151,35 @@ const PlannerSchedule = {
 
             `;
 
-        });
+            return;
 
-        container.innerHTML = html;
+        }
+
+        container.innerHTML = schedule.map(day => `
+
+            <div class="schedule-card">
+
+                <h4>
+
+                    ${Utils.formatDate(day.fecha)}
+
+                </h4>
+
+                <p>
+
+                    📚 ${day.tema}
+
+                </p>
+
+                <p>
+
+                    ⏱ ${day.minutos} minutos
+
+                </p>
+
+            </div>
+
+        `).join("");
 
     }
 
