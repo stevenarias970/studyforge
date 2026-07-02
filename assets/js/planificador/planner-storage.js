@@ -319,5 +319,53 @@ const PlannerStorage = {
 
         });
 
+        this.updateSubjectProgress(subjectId);
+
     },
+    /*
+    =========================================
+    Actualizar progreso de una materia
+    =========================================
+    */
+
+    updateSubjectProgress(subjectId) {
+
+        const subject = this.getSubjectById(subjectId);
+
+        if (!subject) return;
+
+        const totalTopics = subject.temas.length;
+
+        if (totalTopics === 0) {
+
+            this.updateSubject(subjectId, {
+
+                progreso: 0
+
+            });
+
+            return;
+
+        }
+
+        const completedTopics = subject.temas.filter(
+
+            topic => topic.estado === "Completado"
+
+        ).length;
+
+        const progress = Math.round(
+
+            (completedTopics / totalTopics) * 100
+
+        );
+
+        this.updateSubject(subjectId, {
+
+            progreso: progress
+
+        });
+
+    }
+
 };

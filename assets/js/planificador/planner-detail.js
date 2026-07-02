@@ -81,13 +81,29 @@ const PlannerDetail = {
 
                     <div class="info-card">
 
-                        <h4>Progreso</h4>
+                        <h4>Progreso general</h4>
 
-                        <p>${subject.progreso}%</p>
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                style="width:${subject.progreso}%">
+
+                            </div>
+
+                        </div>
+
+                        <p>
+
+                            ${subject.progreso}% completado
+
+                        </p>
 
                     </div>
 
                 </div>
+
+                <!-- TEMAS -->
 
                 <section class="planner-section">
 
@@ -129,6 +145,16 @@ const PlannerDetail = {
 
                 </section>
 
+                <!-- CRONOGRAMA -->
+
+                <section class="planner-section">
+
+                    <h3>Cronograma</h3>
+
+                    <div id="schedule-container"></div>
+
+                </section>
+
             </section>
 
         `;
@@ -136,6 +162,8 @@ const PlannerDetail = {
         this.bindEvents();
 
         PlannerTopics.render(subjectId);
+
+        PlannerSchedule.render(subjectId);
 
         lucide.createIcons();
 

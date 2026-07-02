@@ -79,12 +79,6 @@ const PlannerTopics = {
 
             <h3>${topic.nombre}</h3>
 
-            <span class="topic-status">
-
-                ${topic.estado}
-
-            </span>
-
         </div>
 
         <div class="topic-info">
@@ -95,11 +89,56 @@ const PlannerTopics = {
 
             </span>
 
-            <span>
+            <label>
 
-                ⏱ ${topic.tiempoEstimado} min
+                ⏱
 
-            </span>
+                <input
+                    type="number"
+                    min="1"
+                    class="topic-time"
+                    data-id="${topic.id}"
+                    value="${topic.tiempoEstimado}">
+
+                min
+
+            </label>
+
+        </div>
+
+        <div class="topic-status-container">
+
+            <label>Estado</label>
+
+            <select
+                class="topic-status-select"
+                data-id="${topic.id}">
+
+                <option
+                    value="Pendiente"
+                    ${topic.estado === "Pendiente" ? "selected" : ""}>
+
+                    Pendiente
+
+                </option>
+
+                <option
+                    value="En progreso"
+                    ${topic.estado === "En progreso" ? "selected" : ""}>
+
+                    En progreso
+
+                </option>
+
+                <option
+                    value="Completado"
+                    ${topic.estado === "Completado" ? "selected" : ""}>
+
+                    Completado
+
+                </option>
+
+            </select>
 
         </div>
 
@@ -374,6 +413,73 @@ const PlannerTopics = {
     */
 
     bindTopicEvents() {
+
+        // Cambiar estado
+        document
+            .querySelectorAll(".topic-status-select")
+            .forEach(select => {
+
+                select.onchange = () => {
+
+                    PlannerStorage.updateTopic(
+
+                        PlannerDetail.currentSubjectId,
+
+                        select.dataset.id,
+
+                        {
+
+                            estado: select.value,
+
+                            progreso: select.value === "Completado"
+                                ? 100
+                                : 0
+
+                        }
+
+                    );
+
+                    PlannerDetail.render(
+
+                        PlannerDetail.currentSubjectId
+
+                    );
+
+                };
+
+            });
+        
+        // Cambiar tiempo estimado
+        document
+            .querySelectorAll(".topic-time")
+            .forEach(input => {
+
+                input.onchange = () => {
+
+                    PlannerStorage.updateTopic(
+
+                        PlannerDetail.currentSubjectId,
+
+                        input.dataset.id,
+
+                        {
+
+                            tiempoEstimado: Number(input.value)
+
+                        }
+
+                    );
+
+                    Utils.showToast(
+
+                        "Tiempo actualizado."
+
+                    );
+
+                };
+
+            });
+
 
         // Editar
         document
